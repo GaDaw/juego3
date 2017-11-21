@@ -2,25 +2,14 @@
 
 namespace FightGame
 {
-    public enum Gender
-    {
-        Male,
-        Female
-    }
-
     public class Player
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public int Lives { get; set; }
         public int Power { get; set; }
         public int Gems { get; set; }
         public Gender Gender { get; set; }
-
-        public Player()
-        {
-
-        }
 
         public void Status()
         {
@@ -28,12 +17,10 @@ namespace FightGame
                 ? "Hombre"
                 : "Mujer";
 
-            Console.WriteLine($"{Name}\t\t{Lives}\t{Power}\t{Gems}\t{genderDisplay}");
+            ConsoleHelper.Write($"{FixedName}\t\t{Id}\t{Lives}\t{Power}\t{Gems}\t{genderDisplay}", 
+                Lives > 0 ? ConsoleColor.White : ConsoleColor.Red);
         }
 
-        public void Train()
-        {
-
-        }
+        private string FixedName => Name.PadRight(15);
     }
 }
