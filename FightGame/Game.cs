@@ -18,29 +18,29 @@ namespace FightGame
             {
                 new Player
                 {
-                    Name = "Alberto",
+                    Name = "Batman",
                     Gender = Gender.Male,
                     Lives = DefaultLives,
                     Power = DefaultPower
                 },
                 new Player
                 {
-                    Name = "Mary",
+                    Name = "CatWoman",
                     Gender = Gender.Female,
                     Lives = DefaultLives,
                     Power = DefaultPower
                 },
                 new Player
                 {
-                    Name = "Juan",
+                    Name = "Lobezno",
                     Gender = Gender.Male,
                     Lives = DefaultLives,
                     Power = DefaultPower
                 },
                 new Player
                 {
-                    Name = "Thor",
-                    Gender = Gender.Male,
+                    Name = "WonderWoman",
+                    Gender = Gender.Female,
                     Lives = DefaultLives,
                     Power = DefaultPower
                 },
