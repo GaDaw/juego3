@@ -12,7 +12,7 @@ namespace FightGame
 
         public List<Player> Players { get; set; }
 
-        private Random _random = new Random();
+        private Random _random = new Random(DateTime.Now.Millisecond);
         private int _lastId = 0;
 
         public Game()
