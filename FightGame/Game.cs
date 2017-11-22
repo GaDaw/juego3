@@ -24,7 +24,7 @@ namespace FightGame
  |    __)  |  |/ ___\|  |  \   __\ /   \  ___\__  \  /     \_/ __ \ 
  |     \   |  / /_/  >   Y  \  |   \    \_\  \/ __ \|  Y Y  \  ___/ 
  \___  /   |__\___  /|___|  /__|    \______  (____  /__|_|  /\___  >
-     \/      /_____/      \/               \/     \/      \/     \/  by Diego", ConsoleColor.Red);
+     \/      /_____/      \/               \/     \/      \/     \/  by Diego", ConsoleColor.Cyan);
 
             Players = new List<Player>
             {
@@ -210,7 +210,7 @@ namespace FightGame
                     ConsoleColor.Green);
 
                 // cada 3 gemas le damos una vida
-                if (player1.Gems % 3 == 0)
+                if (player1.Gems > 0 && player1.Gems % 3 == 0)
                 {
                     player1.Lives++;
                     player1.Gems -= 3;
@@ -241,7 +241,7 @@ namespace FightGame
             }
             else
             {
-                Console.WriteLine($"\nNombre\t\t\tVidas\tPoder\tGemas\tSexo");
+                Console.WriteLine($"\nNombre\t\t\tId\tVidas\tPoder\tGemas\tSexo");
                 Console.WriteLine($"--------------------------------------------------------");
 
                 var ordered = Players
