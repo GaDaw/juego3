@@ -28,14 +28,7 @@ namespace FightGame
 
             Players = new List<Player>
             {
-                new Player
-                {
-                    Id = ++_lastId,
-                    Name = "Batman",
-                    Gender = Gender.Male,
-                    Lives = DefaultLives,
-                    Power = DefaultPower
-                },
+                
                 new Player
                 {
                     Id = ++_lastId,
@@ -57,6 +50,14 @@ namespace FightGame
                     Id = ++_lastId,
                     Name = "Wonder Woman",
                     Gender = Gender.Female,
+                    Lives = DefaultLives,
+                    Power = DefaultPower
+                },
+                new Player
+                {
+                    Id = ++_lastId,
+                    Name = "Batman",
+                    Gender = Gender.Male,
                     Lives = DefaultLives,
                     Power = DefaultPower
                 },
@@ -161,7 +162,7 @@ namespace FightGame
                 .Where(x => x.Lives > 0)
                 .ToList();
 
-            // hay más de un jugador? no = error, si = seguimos
+            // hay más de un jugador?
             if (currentPlayers.Count < 2)
             {
                 ConsoleHelper.Write("\nNo hay suficientes jugadores", ConsoleColor.Red);
@@ -173,7 +174,7 @@ namespace FightGame
             var player1 = currentPlayers[indexPlayer1];
 
             // elegir el segundo player aleatoriamente pero que no se repita
-            int indexPlayer2 = 0;
+            int indexPlayer2 = _random.Next(0, currentPlayers.Count);
             while (indexPlayer1 == indexPlayer2)
                 indexPlayer2 = _random.Next(0, currentPlayers.Count);
 
@@ -189,7 +190,9 @@ namespace FightGame
             if (player2.Power <= 0)
             {
                 player2.Lives--;
-                player2.Power = player2.Lives > 0 ? DefaultPower : 0;
+                player2.Power = player2.Lives > 0 
+                    ? DefaultPower 
+                    : 0;
 
                 if (player2.Lives > 0)
                 {
@@ -210,10 +213,10 @@ namespace FightGame
                     ConsoleColor.Green);
 
                 // cada 3 gemas le damos una vida
-                if (player1.Gems > 0 && player1.Gems % 3 == 0)
+                if (player1.Gems == 3)
                 {
                     player1.Lives++;
-                    player1.Gems -= 3;
+                    player1.Gems = 0;
 
                     ConsoleHelper.Write($"{player1.Name} ha ganado una VIDA!!",
                         ConsoleColor.Magenta);
@@ -243,9 +246,9 @@ namespace FightGame
             {
                 Console.WriteLine($"\nNombre\t\t\tId\tVidas\tPoder\tGemas\tSexo");
                 Console.WriteLine($"--------------------------------------------------------");
-
+                
                 var ordered = Players
-                    .OrderByDescending(x => x.Lives)
+                    .OrderByDescending(player => player.Lives)
                     .ThenByDescending(x => x.Power)
                     .ThenByDescending(x => x.Gems);
 
