@@ -19,7 +19,7 @@ namespace FightGame
 
         public Player()
         {
-
+            // comentario
         }
 
         public void Status()
