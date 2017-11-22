@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace FightGame
 {
+    //
     public class Game
     {
         public const int DefaultLives = 2;
