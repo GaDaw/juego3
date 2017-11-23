@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace FightGame
@@ -9,12 +12,12 @@ namespace FightGame
     {
         public const int DefaultLives = 2;
         public const int DefaultPower = 10;
+        public static int LastId = 0;
 
         public List<Player> Players { get; set; }
 
         private Random _random = new Random(DateTime.Now.Millisecond);
-        private int _lastId = 0;
-
+        
         public Game()
         {
             // Generador de arte ascii: http://patorjk.com/software/taag/#p=display&f=Graffiti&t=Fight%20Game
@@ -26,42 +29,26 @@ namespace FightGame
  \___  /   |__\___  /|___|  /__|    \______  (____  /__|_|  /\___  >
      \/      /_____/      \/               \/     \/      \/     \/  by Diego", ConsoleColor.Cyan);
 
-            Players = new List<Player>
-            {
-                
-                new Player
-                {
-                    Id = ++_lastId,
-                    Name = "Cat Woman",
-                    Gender = Gender.Female,
-                    Lives = DefaultLives,
-                    Power = DefaultPower
-                },
-                new Player
-                {
-                    Id = ++_lastId,
-                    Name = "Lobezno",
-                    Gender = Gender.Male,
-                    Lives = DefaultLives,
-                    Power = DefaultPower
-                },
-                new Player
-                {
-                    Id = ++_lastId,
-                    Name = "Wonder Woman",
-                    Gender = Gender.Female,
-                    Lives = DefaultLives,
-                    Power = DefaultPower
-                },
-                new Player
-                {
-                    Id = ++_lastId,
-                    Name = "Batman",
-                    Gender = Gender.Male,
-                    Lives = DefaultLives,
-                    Power = DefaultPower
-                },
-            };
+            IPlayerService playerService = new ApiPlayerService();
+            Players = playerService.GetPlayers();
+        }
+
+        private async Task GetPlayers()
+        {
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            //client.DefaultRequestHeaders.Accept.Add(
+            //    new MediaTypeWithQualityHeaderValue("application/vnd.github.v3+json"));
+            //client.DefaultRequestHeaders.Add("User-Agent", "Fight Game v1");
+            // var stringTask = client.GetStringAsync("https://api.github.com/users/xleon/repos");
+
+            var stringTask = client.GetStringAsync("https://swapi.co/api/people");
+            var result = await stringTask;
+            // var json = JsonConvert.DeserializeObject<Type>(json);
+
+            // Console.Write(json);
         }
 
         public void Run()
@@ -144,7 +131,7 @@ namespace FightGame
 
             var player = new Player
             {
-                Id = ++_lastId,
+                Id = ++LastId,
                 Gender = gender.Value,
                 Name = name,
                 Power = DefaultPower,
@@ -245,7 +232,7 @@ namespace FightGame
             else
             {
                 Console.WriteLine($"\nNombre\t\t\tId\tVidas\tPoder\tGemas\tSexo");
-                Console.WriteLine($"--------------------------------------------------------");
+                Console.WriteLine($"---------------------------------------------------------------------");
                 
                 var ordered = Players
                     .OrderByDescending(player => player.Lives)
