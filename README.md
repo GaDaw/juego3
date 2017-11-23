@@ -53,13 +53,13 @@ web de la EOI.
 - Parámetros de método
 - Arrays
 - Colecciones
-- LINQ + Lambdas
+- LINQ + Lambda
 - Clases y objetos
 - Herencia
 - Polimorfismo
 - Encapsulación
 - Métodos estáticos
-- Async, await, Task, Task<T>
+- Async, await, Task
 - Lanzamiento y manejo de excepciones
 
 ### REST
@@ -67,7 +67,7 @@ web de la EOI.
 - Qué es REST
 - Métodos básicos REST
 - Probar una API REST con Postman
-- Consumir una API REST desde C#
+- Consumir una API REST desde C# con `HttpClient`
 - Crear una API REST con Asp.NET Core
 
 ## Pantallazos del juego
