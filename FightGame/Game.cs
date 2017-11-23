@@ -1,20 +1,20 @@
-﻿using System;
+﻿using FightGame.Model;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace FightGame
 {
     public class Game
     {
-        public const int DefaultLives = 2;
-        public const int DefaultPower = 10;
-
         public List<Player> Players { get; set; }
 
         private Random _random = new Random(DateTime.Now.Millisecond);
-        private int _lastId = 0;
-
+        
         public Game()
         {
             // Generador de arte ascii: http://patorjk.com/software/taag/#p=display&f=Graffiti&t=Fight%20Game
@@ -26,42 +26,8 @@ namespace FightGame
  \___  /   |__\___  /|___|  /__|    \______  (____  /__|_|  /\___  >
      \/      /_____/      \/               \/     \/      \/     \/  by Diego", ConsoleColor.Cyan);
 
-            Players = new List<Player>
-            {
-                
-                new Player
-                {
-                    Id = ++_lastId,
-                    Name = "Cat Woman",
-                    Gender = Gender.Female,
-                    Lives = DefaultLives,
-                    Power = DefaultPower
-                },
-                new Player
-                {
-                    Id = ++_lastId,
-                    Name = "Lobezno",
-                    Gender = Gender.Male,
-                    Lives = DefaultLives,
-                    Power = DefaultPower
-                },
-                new Player
-                {
-                    Id = ++_lastId,
-                    Name = "Wonder Woman",
-                    Gender = Gender.Female,
-                    Lives = DefaultLives,
-                    Power = DefaultPower
-                },
-                new Player
-                {
-                    Id = ++_lastId,
-                    Name = "Batman",
-                    Gender = Gender.Male,
-                    Lives = DefaultLives,
-                    Power = DefaultPower
-                },
-            };
+            IPlayerService playerService = new ApiPlayerService();
+            Players = playerService.GetPlayers();
         }
 
         public void Run()
@@ -144,11 +110,11 @@ namespace FightGame
 
             var player = new Player
             {
-                Id = ++_lastId,
+                Id = ++GameModel.LastId,
                 Gender = gender.Value,
                 Name = name,
-                Power = DefaultPower,
-                Lives = DefaultLives
+                Power = GameModel.DefaultPower,
+                Lives = GameModel.DefaultLives
             };
 
             Players.Add(player);
@@ -191,7 +157,7 @@ namespace FightGame
             {
                 player2.Lives--;
                 player2.Power = player2.Lives > 0 
-                    ? DefaultPower 
+                    ? GameModel.DefaultPower 
                     : 0;
 
                 if (player2.Lives > 0)
@@ -244,8 +210,8 @@ namespace FightGame
             }
             else
             {
-                Console.WriteLine($"\nNombre\t\t\tId\tVidas\tPoder\tGemas\tSexo");
-                Console.WriteLine($"--------------------------------------------------------");
+                Console.WriteLine($"\n{"Nombre".PadRight(20)}\t\tId\tVidas\tPoder\tGemas\tSexo");
+                Console.WriteLine($"---------------------------------------------------------------------");
                 
                 var ordered = Players
                     .OrderByDescending(player => player.Lives)
@@ -254,7 +220,10 @@ namespace FightGame
 
                 foreach (var player in ordered)
                 {
-                    player.Status();
+                    var status = player.Status();
+                    var color = player.Lives > 0 ? ConsoleColor.White : ConsoleColor.Red;
+
+                    ConsoleHelper.Write(status, color);
                 }
             }
         }
