@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using FightGame;
 
 namespace FightGameApi.Controllers
 {
@@ -11,19 +12,24 @@ namespace FightGameApi.Controllers
     {
         // GET api/players
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<Player> Get()
         {
-            return new string[] { "pepito", "fulanito", "menganito" };
+            var playerService = new CustomPlayerService();
+            return playerService.GetPlayers();
         }
 
-        // GET api/values/5
+        // GET api/players/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public Player Get(int id)
         {
-            return "value";
+            var playerService = new CustomPlayerService();
+            var players = playerService.GetPlayers();
+            var player = players.FirstOrDefault(x => x.Id == id);
+
+            return player;
         }
 
-        // POST api/values
+        // POST api/players
         [HttpPost]
         public void Post([FromBody]string value)
         {
