@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace FightGame
+﻿namespace FightGame
 {
     public class Player
     {

@@ -64,7 +64,7 @@ web de la EOI.
 
 ### REST
 
-- Qué es REST
+- Introducción a REST
 - Métodos básicos REST
 - Probar una API REST con Postman
 - Consumir una API REST desde C# con `HttpClient`

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FightGame.Model
+﻿namespace FightGame.Model
 {
     public class GameModel
     {

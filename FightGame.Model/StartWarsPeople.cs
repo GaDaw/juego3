@@ -1,13 +1,12 @@
 ﻿using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace FightGame
 {
     public class StartWarsPeople
     {
-        public List<Person> results { get; set; }
+        [JsonProperty("results")]
+        public List<Person> Results { get; set; }
     }
 
     public class Person
