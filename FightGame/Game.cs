@@ -33,24 +33,6 @@ namespace FightGame
             Players = playerService.GetPlayers();
         }
 
-        private async Task GetPlayers()
-        {
-            var client = new HttpClient();
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            //client.DefaultRequestHeaders.Accept.Add(
-            //    new MediaTypeWithQualityHeaderValue("application/vnd.github.v3+json"));
-            //client.DefaultRequestHeaders.Add("User-Agent", "Fight Game v1");
-            // var stringTask = client.GetStringAsync("https://api.github.com/users/xleon/repos");
-
-            var stringTask = client.GetStringAsync("https://swapi.co/api/people");
-            var result = await stringTask;
-            // var json = JsonConvert.DeserializeObject<Type>(json);
-
-            // Console.Write(json);
-        }
-
         public void Run()
         {
             Menu();
