@@ -8,23 +8,25 @@ namespace FightGameApi.Controllers
     [Route("api/[controller]")]
     public class PlayersController : Controller
     {
+        private IPlayerService _playerService;
+
+        public PlayersController(IPlayerService playerService)
+        {
+            _playerService = playerService;
+        }
+
         // GET api/players
         [HttpGet]
         public IEnumerable<Player> Get()
         {
-            var playerService = new CustomPlayerService();
-            return playerService.GetPlayers();
+            return _playerService.GetPlayers();
         }
 
         // GET api/players/5
         [HttpGet("{id}")]
         public Player Get(int id)
         {
-            var playerService = new CustomPlayerService();
-            var players = playerService.GetPlayers();
-            var player = players.FirstOrDefault(x => x.Id == id);
-
-            return player;
+            return _playerService.GetPlayerById(id);
         }
 
         // POST api/players
@@ -33,13 +35,13 @@ namespace FightGameApi.Controllers
         {
         }
 
-        // PUT api/values/5
+        // PUT api/players/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody]string value)
         {
         }
 
-        // DELETE api/values/5
+        // DELETE api/players/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
