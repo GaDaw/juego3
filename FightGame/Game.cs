@@ -23,7 +23,7 @@ namespace FightGame
  \___  /   |__\___  /|___|  /__|    \______  (____  /__|_|  /\___  >
      \/      /_____/      \/               \/     \/      \/     \/  by Diego", ConsoleColor.Cyan);
 
-            IPlayerService playerService = new ApiPlayerService();
+            IPlayerService playerService = new StarwarsPlayerService();
             Players = playerService.GetPlayers();
         }
 

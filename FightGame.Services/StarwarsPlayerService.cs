@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FightGame
 {
-    public class ApiPlayerService : IPlayerService
+    public class StarwarsPlayerService : IPlayerService
     {
         private const string ApiUrl = "https://swapi.co/api/people/";
 
