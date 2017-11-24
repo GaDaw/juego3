@@ -52,16 +52,16 @@ namespace FightGame
 
         public Player UpdatePlayer(Player player)
         {
-            var match = _players.FirstOrDefault(x => x.Id == player.Id);
+            var matching = _players.FirstOrDefault(x => x.Id == player.Id);
 
-            if (match != null)
+            if (matching != null)
             {
-                match.Lives = player.Lives;
-                match.Power = player.Power;
-                match.Name = player.Name;
-                match.Gender = player.Gender;
+                matching.Lives = player.Lives;
+                matching.Power = player.Power;
+                matching.Name = player.Name;
+                matching.Gender = player.Gender;
 
-                return match;
+                return matching;
             }
 
             throw new Exception("Jugador no encontrado");
