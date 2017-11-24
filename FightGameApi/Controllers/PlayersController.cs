@@ -2,6 +2,7 @@
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using FightGame;
+using System;
 
 namespace FightGameApi.Controllers
 {
@@ -24,9 +25,18 @@ namespace FightGameApi.Controllers
 
         // GET api/players/5
         [HttpGet("{id}")]
-        public Player Get(int id)
+        public IActionResult Get(int id)
         {
-            return _playerService.GetPlayerById(id);
+            try
+            {
+                var player = _playerService.GetPlayerById(id);
+                return new ObjectResult(player);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return NotFound();
+            }
         }
 
         // POST api/players
