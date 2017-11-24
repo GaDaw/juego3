@@ -40,9 +40,10 @@ namespace FightGame
             //}
 
             // 2: Convertir List<Person> en nuestro List<Player> con LINQ
+            var lastId = 0;
             var players = people.Results.Select(person => new Player
             {
-                Id = ++GameModel.LastId,
+                Id = ++lastId,
                 Name = person.PlayerName,
                 Gender = person.PlayerGender == "male" ? Gender.Male : Gender.Female,
                 Lives = GameModel.DefaultLives,

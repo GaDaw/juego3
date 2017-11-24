@@ -11,7 +11,7 @@ namespace FightGame
             {
                 new Player
                 {
-                    Id = ++GameModel.LastId,
+                    Id = 1,
                     Name = "Cat Woman",
                     Gender = Gender.Female,
                     Lives = GameModel.DefaultLives,
@@ -19,7 +19,7 @@ namespace FightGame
                 },
                 new Player
                 {
-                    Id = ++GameModel.LastId,
+                    Id = 2,
                     Name = "Lobezno",
                     Gender = Gender.Male,
                     Lives = GameModel.DefaultLives,
@@ -27,7 +27,7 @@ namespace FightGame
                 },
                 new Player
                 {
-                    Id = ++GameModel.LastId,
+                    Id = 3,
                     Name = "Wonder Woman",
                     Gender = Gender.Female,
                     Lives = GameModel.DefaultLives,
@@ -35,7 +35,7 @@ namespace FightGame
                 },
                 new Player
                 {
-                    Id = ++GameModel.LastId,
+                    Id = 4,
                     Name = "Batman",
                     Gender = Gender.Male,
                     Lives = GameModel.DefaultLives,

@@ -107,7 +107,7 @@ namespace FightGame
 
             var player = new Player
             {
-                Id = ++GameModel.LastId,
+                Id = Players.Max(x => x.Id) + 1,
                 Gender = gender.Value,
                 Name = name,
                 Power = GameModel.DefaultPower,
